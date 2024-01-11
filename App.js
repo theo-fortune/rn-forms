@@ -6,10 +6,12 @@ import {
   SafeAreaView,
   TextInput,
   Text,
+  Switch,
 } from "react-native";
 
 export default function App() {
   const [name, setName] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
       <TextInput
@@ -30,8 +32,21 @@ export default function App() {
         placeholder="enter your phone number"
         keyboardType="number"
       />
-      <TextInput style={[styles.input, styles.multilineText]} placeholder="message" multiline/>
+      <TextInput
+        style={[styles.input, styles.multilineText]}
+        placeholder="message"
+        multiline
+      />
       <Text style={styles.text}>My name is {name}</Text>
+      <View style={styles.switchContainer}>
+        <Text style={styles.text}>Dark Mode</Text>
+        <Switch
+          value={isDarkMode}
+          onValueChange={() => setIsDarkMode((previousState) => !previousState)}
+          trackColor={{ false: "#767577", true: "lightblue" }}
+          thumbColor="f4f3f4"
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -55,5 +70,11 @@ const styles = StyleSheet.create({
   multilineText: {
     minHeight: 100,
     textAlignVertical: "top",
-  }
+  },
+  switchContainer: {
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+  },
 });
